@@ -202,10 +202,16 @@
             }));
         };
 
+        function toggleTodo (id) {
+            store.dispatch(toggleTodoAction(id));
+        }
+
         const addTodoToDOM = (todo) => {
             const node = document.createElement('li');
+            node.style.textDecoration =  todo.complete ? 'line-through' : 'none';
             const text = document.createTextNode(todo.name);
 
+            node.addEventListener('click', () => toggleTodo(todo.id));
             node.appendChild(text);
 
             document.getElementById('todos').appendChild(node);
