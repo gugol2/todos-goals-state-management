@@ -137,8 +137,11 @@
 
         store.subscribe(() => {
             const { todos, goals } = store.getState();
-            
+
             const todoList = document.getElementById('todos');
+            todoList.innerHTML = '';
+
+            const newTodos = todos.filter(todo => todo.name )
             todos.forEach(todo => {
                 const child = document.createElement("li");
                 child.innerHTML = todo.name
@@ -147,6 +150,8 @@
 
 
             const goalList = document.getElementById('goals');
+            goalList.innerHTML = '';
+
             goals.forEach(goal => {
                 const child = document.createElement("li");
                 child.innerHTML = goal.name
