@@ -138,25 +138,11 @@
         store.subscribe(() => {
             const { todos, goals } = store.getState();
 
-            const todoList = document.getElementById('todos');
-            todoList.innerHTML = '';
+            document.getElementById('todos').innerHTML = '';
+            document.getElementById('goals').innerHTML = '';
 
-            const newTodos = todos.filter(todo => todo.name )
-            todos.forEach(todo => {
-                const child = document.createElement("li");
-                child.innerHTML = todo.name
-                todoList.appendChild(child);
-            });
-
-
-            const goalList = document.getElementById('goals');
-            goalList.innerHTML = '';
-
-            goals.forEach(goal => {
-                const child = document.createElement("li");
-                child.innerHTML = goal.name
-                goalList.appendChild(child);
-            })
+            todos.forEach(addTodoToDOM);
+            goals.forEach(addGoalToDOM);
         });
 
         // store.dispatch(addTodoAction({
@@ -215,6 +201,24 @@
                 id: generateId()
             }));
         };
+
+        const addTodoToDOM = (todo) => {
+            const node = document.createElement('li');
+            const text = document.createTextNode(todo.name);
+
+            node.appendChild(text);
+
+            document.getElementById('todos').appendChild(node);
+        };
+
+        const addGoalToDOM = (goal) => {
+            const node = document.createElement('li');
+            const text = document.createTextNode(goal.name);
+
+            node.append(text);
+
+            document.getElementById('goals').appendChild(node);
+        }
 
         document.getElementById('todoBtn').addEventListener('click', addTodo);
         document.getElementById('goalBtn').addEventListener('click', addGoal);
