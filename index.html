@@ -135,6 +135,25 @@
             console.log('The new state is: ', store.getState())
         })
 
+        store.subscribe(() => {
+            const { todos, goals } = store.getState();
+            
+            const todoList = document.getElementById('todos');
+            todos.forEach(todo => {
+                const child = document.createElement("li");
+                child.innerHTML = todo.name
+                todoList.appendChild(child);
+            });
+
+
+            const goalList = document.getElementById('goals');
+            goals.forEach(goal => {
+                const child = document.createElement("li");
+                child.innerHTML = goal.name
+                goalList.appendChild(child);
+            })
+        });
+
         // store.dispatch(addTodoAction({
         //     id: 0,
         //     name: 'Walk the dog',
